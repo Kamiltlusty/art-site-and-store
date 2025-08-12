@@ -1,0 +1,10 @@
+<section class="carousel-container">
+  <button class="left-arrow-button" (click)="moveSlidesLeft()"><img src="assets/images/left-arrow-button.png" alt="left arrow"></button>
+  <div class="images-container">
+    @for (slide of slides; track idx; let idx = $index) {
+      <app-carousel-slide-component (widthCollected)="getSlideWidth($event)" [transform]="getTransform()"></app-carousel-slide-component>
+    }
+
+  </div>
+  <button class="right-arrow-button" (click)="moveSlidesRight()"><img src="assets/images/right-arrow-button.png" alt="right arrow"></button>
+</section>
