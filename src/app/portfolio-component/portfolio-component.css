@@ -1,24 +1,23 @@
-.about-me-section {
+.portfolio-section {
   display: flex;
   height: 90vh;
-  justify-content: flex-end;
 }
 
-.about-me-header {
+.portfolio-header {
   display: flex;
   height: 10vh;
   width: 60%;
   background-color: #f1dfc1;
 }
 
-.about-me-inscription-container {
+.portfolio-inscription-container {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: center;
 }
 
-.about-me-inscription {
+.portfolio-inscription {
   font-family: 'Gliker-Regular', sans-serif;
   font-size: 4rem;
   padding-bottom: 1rem;
