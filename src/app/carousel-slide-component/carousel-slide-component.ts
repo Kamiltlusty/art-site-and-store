@@ -9,6 +9,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewC
 })
 export class CarouselSlideComponent implements AfterViewInit {
   @Input() transform!: string;
+  @Input() idx! : number;
   @Output() widthCollected = new EventEmitter<number>();
   @ViewChild('slide') slide!: ElementRef<HTMLDivElement>
 
