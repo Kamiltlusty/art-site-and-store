@@ -6,6 +6,7 @@ import {AboutMeComponent} from './about-me-component/about-me-component';
 import {PortfolioComponent} from './portfolio-component/portfolio-component';
 import {ContactComponent} from './contact-component/contact-component';
 import {FooterComponent} from './footer-component/footer-component';
+import {HamburgerMenuComponent} from './hamburger-menu-component/hamburger-menu-component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import {FooterComponent} from './footer-component/footer-component';
     AboutMeComponent,
     PortfolioComponent,
     ContactComponent,
-    FooterComponent
+    FooterComponent,
+    HamburgerMenuComponent
   ],
   templateUrl: './app.html',
   standalone: true,
