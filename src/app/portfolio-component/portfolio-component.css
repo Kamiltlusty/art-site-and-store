@@ -1,6 +1,8 @@
 .portfolio-section {
   display: flex;
   height: 90vh;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
 .portfolio-header {
