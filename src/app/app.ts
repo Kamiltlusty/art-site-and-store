@@ -25,5 +25,5 @@ import {HamburgerMenuComponent} from './hamburger-menu-component/hamburger-menu-
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('art-site-and-store');
+  protected readonly title= signal('art-site-and-store');
 }

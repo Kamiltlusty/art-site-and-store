@@ -8,7 +8,7 @@ import {CarouselSlideComponent} from '../carousel-slide-component/carousel-slide
   standalone: true,
   styleUrl: './carousel-component.css'
 })
-export class CarouselComponent implements AfterViewInit{
+export class CarouselComponent implements AfterViewInit {
   @ViewChild('imgContainer') imgContainer! : ElementRef;
   slides = [
     {id : 1, img: ''},

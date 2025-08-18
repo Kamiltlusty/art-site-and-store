@@ -1,8 +1,9 @@
-<section class="hamburger-container">
-  <div class="menu-options-container">
-    <button>o mnie</button>
-    <button>portfolio</button>
-    <button>cennik</button>
-    <button>kontakt</button>
-  </div>
-</section>
+@if (hamburgerMenuService.isOpen) {
+  <section class="hamburger-container">
+    <div class="menu-options-container">
+      <button (click)="onClickMoveToPositionY('about-me-section')">o mnie</button>
+      <button (click)="onClickMoveToPositionY('portfolio-section')">portfolio</button>
+      <button (click)="onClickMoveToPositionY('contact-section')">kontakt</button>
+    </div>
+  </section>
+}

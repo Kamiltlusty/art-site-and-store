@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject, ViewChild} from '@angular/core';
+import {HamburgerMenuService} from '../shared/services/hamburger-menu-service';
 
 @Component({
   selector: 'app-header-component',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
   standalone: true,
   styleUrl: './header-component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements AfterViewInit {
+  @ViewChild('header') header! : ElementRef;
+  hamburgerMenuService = inject(HamburgerMenuService);
+
+  ngAfterViewInit(): void {
+    this.hamburgerMenuService.headerHeight = this.header.nativeElement.offsetHeight;
+  }
+
+  onHamburgerClick() {
+    this.hamburgerMenuService.toggleMenu();
+  }
 
 }
