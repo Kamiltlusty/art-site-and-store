@@ -11,7 +11,7 @@ import {RouterLink} from '@angular/router';
   standalone: true,
   styleUrl: './portfolio-component.css'
 })
-export class PortfolioComponent implements AfterViewInit{
+export class PortfolioComponent implements AfterViewInit {
   @ViewChild('portfolioSection') portfolioSection! : ElementRef;
   hamburgerMenuService = inject(HamburgerMenuService);
 
