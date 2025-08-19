@@ -1,9 +1,12 @@
 import {AfterViewInit, Component, ElementRef, inject, ViewChild} from '@angular/core';
-import {HamburgerMenuService} from '../shared/services/hamburger-menu-service';
+import {HamburgerMenuService} from '../../services/hamburger-menu-service';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-portfolio-component',
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './portfolio-component.html',
   standalone: true,
   styleUrl: './portfolio-component.css'

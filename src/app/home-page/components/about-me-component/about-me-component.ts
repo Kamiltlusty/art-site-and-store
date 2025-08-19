@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, inject, ViewChild} from '@angular/core';
-import {HamburgerMenuService} from '../shared/services/hamburger-menu-service';
+import {HamburgerMenuService} from '../../services/hamburger-menu-service';
 
 @Component({
   selector: 'app-about-me-component',
