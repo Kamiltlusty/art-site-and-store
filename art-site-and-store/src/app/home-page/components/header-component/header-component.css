@@ -1,0 +1,69 @@
+.header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  background-color: #f1dfc1;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  z-index: 10;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.burger-container {
+  display: flex;
+  width: 8%;
+  justify-content: center;
+  align-items: center;
+}
+
+.burger-button {
+  height: 100%;
+  background-color: transparent;
+  border-width: 0;
+}
+
+.burger-image {
+  padding-top: 0.5rem;
+  width: 4rem;
+}
+
+.page-name-container {
+  display: flex;
+  width: 82%;
+  align-items: center;
+}
+
+.page-name {
+  font-family: 'Gliker-Regular', sans-serif;
+  font-size: 4rem;
+  padding-bottom: 1rem;
+  color: #3f1d02;
+}
+
+.header-buttons-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.fb-button {
+  background-color: transparent;
+  border-width: 0;
+}
+
+
+.fb-image {
+  width: 4rem;
+}
+
+.ig-button {
+  background-color: transparent;
+  border-width: 0;
+}
+
+.ig-image {
+  width: 4rem;
+}

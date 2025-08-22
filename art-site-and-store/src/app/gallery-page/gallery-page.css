@@ -1,0 +1,26 @@
+.header-portfolio {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  background-color: #f1dfc1;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  z-index: 10;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.page-header-bar {
+  display: flex;
+  width: 82%;
+  align-items: center;
+}
+
+.page-name {
+  font-family: 'Gliker-Regular', sans-serif;
+  font-size: 4rem;
+  padding-bottom: 1rem;
+  padding-left: 3rem;
+  color: #3f1d02;
+}

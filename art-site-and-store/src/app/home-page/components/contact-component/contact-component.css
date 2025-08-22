@@ -1,0 +1,87 @@
+.contact-section {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-header {
+  display: flex;
+  height: 10vh;
+  width: 60%;
+  background-color: #f1dfc1;
+}
+
+.contact-inscription-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-inscription {
+  font-family: 'Gliker-Regular', sans-serif;
+  font-size: 4rem;
+  padding-bottom: 1rem;
+  color: #3f1d02;
+}
+
+.contact-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-label {
+  align-self: flex-start;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: crimson;
+}
+
+.fullname-container {
+  display: flex;
+  width: 100%;
+  height: 5%;
+  flex-wrap: nowrap;
+  gap: 1%
+}
+
+.name, .surname {
+  width: 49%;
+  border-radius: 0;
+  border: solid black 1px;
+  font-size: 1.5rem;
+}
+
+
+.email-address {
+  box-sizing: border-box;
+  height: 5%;
+  width: 100%;
+  border: solid black 1px;
+  font-size: 1.5rem;
+}
+
+.message-text {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40%;
+  border: solid black 1px;
+  resize: none;
+  font-size: 1rem;
+}
+
+
+.form-button {
+  align-self: flex-start;
+  background-color: cadetblue;
+  border: none;
+  border-radius: 2px;
+  height: 3rem;
+  color: white;
+}

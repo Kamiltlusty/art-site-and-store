@@ -1,0 +1,6 @@
+.card-container {
+  display: block;
+  width: 20rem;
+  height: 20rem;
+  border: solid black;
+}

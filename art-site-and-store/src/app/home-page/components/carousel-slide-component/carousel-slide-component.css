@@ -1,0 +1,16 @@
+.image-container {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 400px;
+  height: 39rem;
+  background-color: yellow;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: contain;
+}
+
