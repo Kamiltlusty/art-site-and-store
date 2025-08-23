@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {CarouselSlideComponent} from '../carousel-slide-component/carousel-slide-component';
 import {AsyncPipe, NgStyle} from '@angular/common';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, map} from 'rxjs';
+import {CarouselDataService} from '../../services/carousel-data-service';
 
 @Component({
   selector: 'app-carousel-component',
@@ -12,7 +13,6 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class CarouselComponent implements AfterViewInit {
   @ViewChild('imgContainer') imgContainer!: ElementRef;
-  @ViewChildren('slide') slideList!: QueryList<ElementRef>
   slides = [
     {id: 1, img: ''},
     {id: 2, img: ''},
@@ -22,10 +22,11 @@ export class CarouselComponent implements AfterViewInit {
     {id: 6, img: ''}
   ]
   offset = 0;
-  selectedFile$ : BehaviorSubject<File | null> = new BehaviorSubject<File | null>(null);
+  selectedFile$: BehaviorSubject<File | null> = new BehaviorSubject<File | null>(null);
   transform = 'translate(0px)';
   slideWidth!: number;
   slideGap!: number;
+  carouselDataService = inject(CarouselDataService);
 
   ngAfterViewInit(): void {
     this.slideGap = parseFloat(getComputedStyle(this.imgContainer.nativeElement).gap);
@@ -40,9 +41,17 @@ export class CarouselComponent implements AfterViewInit {
     }
   }
 
+  onRemoveButtonClick() {
+    if (this.carouselDataService.amountOfImages === 0) {
+      console.log("amount of images in slides is 0")
+      return;
+    }
+    this.carouselDataService.isDeleteModeOn$.next(true);
+  }
+
   moveSlidesRight(): void {
     console.log("moving slides to the right");
-    console.log(this.slideWidth + this.slideGap)
+    console.log(this.slideWidth + this.slideGap);
     console.log('Przed:', this.slides.map(s => s.id));
 
     const last = this.slides.pop();

@@ -2,9 +2,8 @@
   @if (true) {
     <div class="carousel-crud-buttons-container">
       <input #fileInput style="display: none" type="file" accept="image/*" (change)="onFileSelected($event)">
-      <button type="button" (click)="fileInput.click()"><img class="add-button-image" src="assets/images/add-button.png"
-                                                             alt="add button"></button>
-      <button><img class="remove-button-image" src="assets/images/remove-button.png" alt="remove button"></button>
+      <button type="button" (click)="fileInput.click()"><img class="add-button-image" src="assets/images/add-button.png" alt="add button"></button>
+      <button (click)="onRemoveButtonClick()"><img class="remove-button-image" src="assets/images/remove-button.png" alt="remove button"></button>
     </div>
   }
   <div class="carousel-container">
@@ -17,12 +16,12 @@
                                       [transform]="transform"
                                       [idx]="slide.id"
                                       [style.border]="(selectedFile$ | async) ? '1px solid black' : 'none'"
-                                      [style.pointer-events]="(selectedFile$ | async) ? 'auto' : 'none'"
+                                      [style.pointer-events]="((selectedFile$ | async) ||
+                                       (carouselDataService.isDeleteModeOn$ | async)) ? 'auto' : 'none'"
                                       [selectedFile$]="selectedFile$"
         ></app-carousel-slide-component>
       }
     </div>
-    <button class="right-arrow-button" (click)="moveSlidesRight()"><img src="assets/images/right-arrow-button.png"
-                                                                        alt="right arrow"></button>
+    <button class="right-arrow-button" (click)="moveSlidesRight()"><img src="assets/images/right-arrow-button.png" alt="right arrow"></button>
   </div>
 </section>
