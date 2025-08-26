@@ -1,0 +1,15 @@
+services:
+  asas-prod-db:
+    image: postgres:17.5
+    container_name: asas-prod-db
+    ports:
+      - "5436:5432"
+    environment:
+      POSTGRES_DB: prod_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - prod_db:/var/lib/postgresql/data
+
+volumes:
+  prod_db:
