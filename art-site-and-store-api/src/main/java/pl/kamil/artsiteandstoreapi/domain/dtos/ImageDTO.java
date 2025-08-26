@@ -1,5 +1,7 @@
 package pl.kamil.artsiteandstoreapi.domain.dtos;
 
-public record ImageDTO(String filename, String url, String mime_type, Long size, String description, Integer width,
+import java.util.UUID;
+
+public record ImageDTO(UUID imageId, String fileName, String url, String mimeType, Long size, String description, Integer width,
                        Integer height) {
 }

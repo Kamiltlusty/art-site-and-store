@@ -15,17 +15,18 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Image {
   @Id
+  @Column(name = "image_id")
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID image_id;
+  private UUID imageId;
 
-  @Column(nullable = false)
-  private String filename;
+  @Column(nullable = false, name = "file_name")
+  private String fileName;
 
   @Column(nullable = false)
   private String url;
 
-  @Column(nullable = false)
-  private String mime_type;
+  @Column(nullable = false, name = "mime_type")
+  private String mimeType;
 
   private Long size;
   private String description;
