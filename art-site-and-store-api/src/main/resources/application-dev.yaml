@@ -1,3 +1,3 @@
 spring:
   datasource:
-    url: jdbc://postgresql://localhost5434:/dev_db
+    url: jdbc:postgresql://localhost:5434/dev_db

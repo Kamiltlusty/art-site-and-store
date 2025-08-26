@@ -1,10 +1,18 @@
 package pl.kamil.artsiteandstoreapi.domain.entieties;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.UUID;
 
+@With
+@Setter
+@Getter
 @Entity
+@Builder
+@EqualsAndHashCode(of = "image_id")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Image {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,8 +31,4 @@ public class Image {
   private String description;
   private Integer width;
   private Integer height;
-
-
-
-
 }
