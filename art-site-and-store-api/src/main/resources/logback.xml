@@ -1,0 +1,33 @@
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <property name="LOG_DIR" value="C:\Users\karat\IdeaProjects\summer-holidays-2025\art-site-and-store-2025\logs"/>
+  <property name="LOG_FILE" value="asas-api"/>
+  <appender name="FILE" class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    <file>${LOG_DIR}/${LOG_FILE}.log</file>
+    <rollingPolicy>
+      <!-- daily rollover -->
+      <fileNamePattern>${LOG_DIR}/%d{yyyy-MM-dd}/${LOG_FILE}.gz</fileNamePattern>
+      <!-- keep 30 days' worth of history capped at 1GB total size -->
+      <maxHisotry>30</maxHisotry>
+      <totalSizeCap>1GB</totalSizeCap>
+    </rollingPolicy>
+    <append>true</append>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+
+  <logger name="pl.kamil.artsiteandstoreapi.application" level="INFO">
+    <appender-ref ref="FILE"/>
+  </logger>
+  <root level="debug">
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>
+
