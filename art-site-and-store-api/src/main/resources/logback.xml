@@ -1,22 +1,24 @@
 <configuration>
+  <property name="LOG_DIR" value="C:\Users\karat\IdeaProjects\summer-holidays-2025\art-site-and-store-2025\logs"/>
+  <property name="LOG_FILE" value="asas-api"/>
+
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
       <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
     </encoder>
   </appender>
 
-  <property name="LOG_DIR" value="C:\Users\karat\IdeaProjects\summer-holidays-2025\art-site-and-store-2025\logs"/>
-  <property name="LOG_FILE" value="asas-api"/>
-  <appender name="FILE" class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${LOG_DIR}/${LOG_FILE}.log</file>
-    <rollingPolicy>
+    <append>true</append>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
       <fileNamePattern>${LOG_DIR}/%d{yyyy-MM-dd}/${LOG_FILE}.gz</fileNamePattern>
       <!-- keep 30 days' worth of history capped at 1GB total size -->
       <maxHisotry>30</maxHisotry>
       <totalSizeCap>1GB</totalSizeCap>
     </rollingPolicy>
-    <append>true</append>
     <encoder>
       <pattern>%d{HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{36} - %msg%n</pattern>
     </encoder>
