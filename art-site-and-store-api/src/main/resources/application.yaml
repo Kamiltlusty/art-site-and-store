@@ -10,3 +10,6 @@ spring:
   docker:
     compose:
       enabled: false
+  jackson:
+    serialization:
+      fail-on-empty-beans: false

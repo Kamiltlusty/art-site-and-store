@@ -1,6 +1,8 @@
-import {AfterViewInit, Component, ElementRef, inject, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
 import {HamburgerMenuService} from '../../services/hamburger-menu-service';
 import {RouterLink} from '@angular/router';
+import {ImageService} from '../../../shared/services/image-service';
+import {Image} from '../../../shared/models/image';
 
 @Component({
   selector: 'app-portfolio-component',
@@ -11,9 +13,22 @@ import {RouterLink} from '@angular/router';
   standalone: true,
   styleUrl: './portfolio-component.css'
 })
-export class PortfolioComponent implements AfterViewInit {
+export class PortfolioComponent implements AfterViewInit, OnInit {
   @ViewChild('portfolioSection') portfolioSection! : ElementRef;
+  @ViewChild('image') image! : ElementRef;
   hamburgerMenuService = inject(HamburgerMenuService);
+  imageService = inject(ImageService);
+  images!: Image[];
+
+  ngOnInit() {
+    this.imageService.getCarouselData().subscribe({
+      next: places => {
+        this.images = places.find(p => p.name === "portfolio")?.images ?? [];
+        this.image.nativeElement.src = this.imageService.apiUrl + "/" + this.images[0].imageId;
+      },
+      error: err => console.log(err)
+    })
+  }
 
   ngAfterViewInit(): void {
     this.hamburgerMenuService.section$.subscribe(sectionName => {

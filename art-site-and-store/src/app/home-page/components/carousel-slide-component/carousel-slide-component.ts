@@ -12,6 +12,8 @@ import {
 import {BehaviorSubject, take} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {CarouselDataService} from '../../services/carousel-data-service';
+import {ImageService} from '../../../shared/services/image-service';
+import {Image} from '../../../shared/models/image';
 
 @Component({
   selector: 'app-carousel-slide-component',
@@ -24,13 +26,14 @@ import {CarouselDataService} from '../../services/carousel-data-service';
 })
 export class CarouselSlideComponent implements AfterViewInit, OnInit {
   @Input() transform!: string;
-  @Input() idx!: number;
+  @Input() img!: Image;
   @Output() widthCollected = new EventEmitter<number>();
   @ViewChild('slide') slide!: ElementRef<HTMLDivElement>
   @ViewChild('image') image!: ElementRef<HTMLImageElement>
   slideWidth = 0;
   @Input() selectedFile$!: BehaviorSubject<File | null>;
   carouselDataService = inject(CarouselDataService);
+  imageService = inject(ImageService);
   private addImageHandler = () => this.addImageToSlide();
   private removeImageHandler = () => this.removeImageFromSlide();
 
@@ -50,6 +53,7 @@ export class CarouselSlideComponent implements AfterViewInit, OnInit {
       .subscribe(() => {
         this.addOnClickEventOnSlides()
       });
+    this.image.nativeElement.src = this.imageService.apiUrl + "/" + this.img.imageId;
   }
 
   addImageToSlide() {

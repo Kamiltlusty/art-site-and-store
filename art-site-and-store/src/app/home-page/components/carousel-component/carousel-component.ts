@@ -15,14 +15,6 @@ import {Image} from '../../../shared/models/image';
 })
 export class CarouselComponent implements AfterViewInit, OnInit {
   @ViewChild('imgContainer') imgContainer!: ElementRef;
-  slides = [
-    {id: 1, img: ''},
-    {id: 2, img: ''},
-    {id: 3, img: ''},
-    {id: 4, img: ''},
-    {id: 5, img: ''},
-    {id: 6, img: ''}
-  ]
   offset = 0;
   selectedFile$: BehaviorSubject<File | null> = new BehaviorSubject<File | null>(null);
   transform = 'translate(0px)';
@@ -34,8 +26,9 @@ export class CarouselComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.imageService.getCarouselData().subscribe({
-      next: images => {
-        this.images = images;
+      next: places => {
+        console.log(places);
+        this.images = places.find(p => p.name === "carousel")?.images ?? [];
         this.images.forEach(i => console.log(i));
       },
       error: err => console.error(err)
@@ -57,28 +50,28 @@ export class CarouselComponent implements AfterViewInit, OnInit {
 
   onRemoveButtonClick() {
     if (this.carouselDataService.amountOfImages === 0) {
-      console.log("amount of images in slides is 0")
+      console.log("amount of images in images is 0")
       return;
     }
     this.carouselDataService.isDeleteModeOn$.next(true);
   }
 
   moveSlidesRight(): void {
-    console.log("moving slides to the right");
+    console.log("moving images to the right");
     console.log(this.slideWidth + this.slideGap);
-    console.log('Przed:', this.slides.map(s => s.id));
+    console.log('Przed:', this.images.map(s => s.imageId));
 
-    const last = this.slides.pop();
-    if (last) this.slides.unshift(last);
+    const last = this.images.pop();
+    if (last) this.images.unshift(last);
 
-    console.log('Po:', this.slides.map(s => s.id));
+    console.log('Po:', this.images.map(s => s.imageId));
   }
 
   moveSlidesLeft(): void {
-    console.log("moving slides to the left");
+    console.log("moving images to the left");
 
-    const first = this.slides.shift();
-    if (first) this.slides.push(first);
+    const first = this.images.shift();
+    if (first) this.images.push(first);
   }
 
   getSlideWidth(slideWidth: number) {

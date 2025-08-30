@@ -1,5 +1,7 @@
-import {AfterViewInit, Component, ElementRef, inject, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild} from '@angular/core';
 import {HamburgerMenuService} from '../../services/hamburger-menu-service';
+import {ImageService} from '../../../shared/services/image-service';
+import {Image} from '../../../shared/models/image';
 
 @Component({
   selector: 'app-about-me-component',
@@ -8,9 +10,23 @@ import {HamburgerMenuService} from '../../services/hamburger-menu-service';
   standalone: true,
   styleUrl: './about-me-component.css'
 })
-export class AboutMeComponent implements AfterViewInit {
+export class AboutMeComponent implements AfterViewInit, OnInit {
   @ViewChild('amSection') amSection! : ElementRef;
+  @ViewChild('image') image! : ElementRef;
   hamburgerMenuService = inject(HamburgerMenuService);
+  imageService = inject(ImageService);
+  images!: Image[];
+
+  ngOnInit() {
+    this.imageService.getCarouselData().subscribe({
+      next: places => {
+        this.images = places.find(p => p.name === "about_me")?.images ?? [];
+        console.log(this.imageService.apiUrl + "/" + this.images[0].imageId);
+        this.image.nativeElement.src = this.imageService.apiUrl + "/" + this.images[0].imageId;
+      },
+      error: err => console.log(err)
+    });
+  }
 
   ngAfterViewInit(): void {
     this.hamburgerMenuService.section$.subscribe(sectionName => {
@@ -24,5 +40,4 @@ export class AboutMeComponent implements AfterViewInit {
       }
     })
   }
-
 }

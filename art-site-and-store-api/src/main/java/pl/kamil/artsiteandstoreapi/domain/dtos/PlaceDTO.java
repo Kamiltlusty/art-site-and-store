@@ -7,7 +7,4 @@ import java.util.List;
 
 @With
 @Builder
-public class PlaceDTO {
-  String name;
-  List<ImageDTO> imagesDTO;
-}
+public record PlaceDTO(String name, List<ImageDTO> images) {}

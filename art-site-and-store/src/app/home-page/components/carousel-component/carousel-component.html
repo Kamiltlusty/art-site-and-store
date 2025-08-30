@@ -10,11 +10,11 @@
     <button class="left-arrow-button" (click)="moveSlidesLeft()"><img src="assets/images/left-arrow-button.png"
                                                                       alt="left arrow"></button>
     <div #imgContainer class="images-container">
-      @for (slide of slides; track slide.id; let idx = $index) {
+      @for (image of images; track image.imageId; let idx = $index) {
         <app-carousel-slide-component #slide
                                       (widthCollected)="getSlideWidth($event)"
                                       [transform]="transform"
-                                      [idx]="slide.id"
+                                      [img]="image"
                                       [style.border]="(selectedFile$ | async) ? '1px solid black' : 'none'"
                                       [style.pointer-events]="((selectedFile$ | async) ||
                                        (carouselDataService.isDeleteModeOn$ | async)) ? 'auto' : 'none'"
