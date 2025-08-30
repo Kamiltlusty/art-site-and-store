@@ -1,8 +1,10 @@
-import {AfterViewInit, Component, ElementRef, inject, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {CarouselSlideComponent} from '../carousel-slide-component/carousel-slide-component';
 import {AsyncPipe, NgStyle} from '@angular/common';
 import {BehaviorSubject, map} from 'rxjs';
 import {CarouselDataService} from '../../services/carousel-data-service';
+import {ImageService} from '../../../shared/services/image-service';
+import {Image} from '../../../shared/models/image';
 
 @Component({
   selector: 'app-carousel-component',
@@ -11,7 +13,7 @@ import {CarouselDataService} from '../../services/carousel-data-service';
   standalone: true,
   styleUrl: './carousel-component.css'
 })
-export class CarouselComponent implements AfterViewInit {
+export class CarouselComponent implements AfterViewInit, OnInit {
   @ViewChild('imgContainer') imgContainer!: ElementRef;
   slides = [
     {id: 1, img: ''},
@@ -27,6 +29,18 @@ export class CarouselComponent implements AfterViewInit {
   slideWidth!: number;
   slideGap!: number;
   carouselDataService = inject(CarouselDataService);
+  imageService = inject(ImageService);
+  images!: Image[];
+
+  ngOnInit() {
+    this.imageService.getCarouselData().subscribe({
+      next: images => {
+        this.images = images;
+        this.images.forEach(i => console.log(i));
+      },
+      error: err => console.error(err)
+    });
+  }
 
   ngAfterViewInit(): void {
     this.slideGap = parseFloat(getComputedStyle(this.imgContainer.nativeElement).gap);

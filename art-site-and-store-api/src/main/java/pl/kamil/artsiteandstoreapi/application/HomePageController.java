@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import pl.kamil.artsiteandstoreapi.domain.dtos.ImageDTO;
 import pl.kamil.artsiteandstoreapi.domain.dtos.PlaceDTO;
 import pl.kamil.artsiteandstoreapi.domain.entieties.Place;
 
@@ -23,14 +24,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class HomePageController {
   private final ImageService imageService;
-  private final PlaceMapper placeMapper;
+  private final ImageMapper imageMapper;
   private static final Logger logger = LoggerFactory.getLogger(HomePageController.class);
 
   @GetMapping("/carousel")
-  public ResponseEntity<List<PlaceDTO>> getCarousel() {
-    List<PlaceDTO> carousel = imageService.findAll().stream()
-      .map(placeMapper::toPlaceDTO)
-      .toList();
+  public ResponseEntity<List<ImageDTO>> getCarousel() {
+    List<ImageDTO> carousel = imageService.findByName("carousel").getImages().stream()
+      .map(imageMapper::toImageDTO).toList();
 
     return ResponseEntity
       .ok()

@@ -8,7 +8,7 @@
     </encoder>
   </appender>
 
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender" >
     <file>${LOG_DIR}/${LOG_FILE}.log</file>
     <append>true</append>
 
@@ -25,10 +25,10 @@
   </appender>
 
 
-  <logger name="pl.kamil.artsiteandstoreapi.application" level="INFO">
+  <logger name="pl.kamil.artsiteandstoreapi.application" level="INFO" additivity="false">
     <appender-ref ref="FILE"/>
   </logger>
-  <root level="debug">
+  <root level="info">
     <appender-ref ref="STDOUT"/>
   </root>
 </configuration>

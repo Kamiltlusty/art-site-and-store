@@ -11,18 +11,19 @@ import java.util.UUID;
 @Getter
 @Entity
 @Builder
-@EqualsAndHashCode(of = "place_id")
+@EqualsAndHashCode(of = "placeId")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Place {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID place_id;
+  @Column(name = "place_id")
+  private UUID placeId;
 
   @Column(nullable = false)
   private String name;
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
     name = "place_image",
     joinColumns = @JoinColumn(name = "place_id"),
