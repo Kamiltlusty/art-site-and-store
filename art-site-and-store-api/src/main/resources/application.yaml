@@ -13,3 +13,9 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+#    org.springframework.security.web.access.access: DEBUG
+#    org.springframework.security.web.access.authentication: DEBUG
