@@ -19,7 +19,7 @@ public class UserManagementConfig {
   UserDetailsService userDetailsService() {
     var admin = User
       .withUsername("admin")
-      .password("{bcrypt}" + new BCryptPasswordEncoder().encode("admin"))
+      .password(passwordEncoder().encode("admin"))
       .roles("ADMIN")
       .build();
 

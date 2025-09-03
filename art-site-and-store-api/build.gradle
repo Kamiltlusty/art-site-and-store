@@ -38,6 +38,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
   // security
   implementation 'org.springframework.boot:spring-boot-starter-security'
+  implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
   testImplementation 'org.springframework.security:spring-security-test'
   // test
   testImplementation 'org.testcontainers:junit-jupiter'

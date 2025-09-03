@@ -2,15 +2,15 @@ package pl.kamil.artsiteandstoreapi.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import pl.kamil.artsiteandstoreapi.domain.dtos.ImageDTO;
 import pl.kamil.artsiteandstoreapi.domain.dtos.PlaceDTO;
 import pl.kamil.artsiteandstoreapi.domain.entieties.Place;
 
@@ -21,7 +21,6 @@ import java.util.UUID;
 
 
 @Slf4j
-@CrossOrigin("http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
 public class HomePageController {
@@ -29,6 +28,21 @@ public class HomePageController {
   private final ImageMapper imageMapper;
   private final PlaceMapper placeMapper;
   private static final Logger logger = LoggerFactory.getLogger(HomePageController.class);
+
+  @PostMapping("/carousel/manage")
+  public ResponseEntity<String> postImage(
+    @RequestBody ImageDTO imageDTO,
+    @RequestBody MultipartFile file) {
+
+
+    return ResponseEntity.ok().body("image has been added");
+  }
+
+  @DeleteMapping("/carousel/manage")
+  public ResponseEntity<String> deleteImage(@RequestBody ImageDTO imageDTO) {
+
+    return ResponseEntity.ok().body("image has been deleted");
+  }
 
   @GetMapping("/carousel")
   public ResponseEntity<List<PlaceDTO>> getCarousel() {
@@ -64,5 +78,4 @@ public class HomePageController {
       .headers(headers)
       .body(isr);
   }
-
 }

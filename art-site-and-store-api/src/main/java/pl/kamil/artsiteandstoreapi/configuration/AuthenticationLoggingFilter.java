@@ -19,9 +19,8 @@ public class AuthenticationLoggingFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request,
                                   HttpServletResponse response,
                                   FilterChain filterChain) throws ServletException, IOException {
-    String requestId = request.getHeader("Request-ID");
 
-    logger.info("Successfully authenticated request with id {}", requestId);
+    logger.info("Successfully authenticated request");
 
     filterChain.doFilter(request, response);
   }

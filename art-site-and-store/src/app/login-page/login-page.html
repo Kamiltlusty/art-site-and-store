@@ -1,1 +1,7 @@
+<form class="login-form" [formGroup]="applyForm" (submit)="submitForm()">
+  <label class="login-label">Logowanie</label>
+  <input class="login-username" type="text" placeholder="nazwa użytkownika" formControlName="username">
+  <input class="login-password" type="password" placeholder="hasło" formControlName="password">
+  <button class="login-button" type="submit">Prześlij</button>
+</form>
 
