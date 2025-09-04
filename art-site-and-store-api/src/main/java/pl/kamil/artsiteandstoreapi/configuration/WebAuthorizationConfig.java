@@ -74,12 +74,8 @@ public class WebAuthorizationConfig {
         .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
         .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
         .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-        .redirectUri("http://localhost:4200/admin/oauth2/code") // albo login zamiast admin
-        .postLogoutRedirectUri("http://localhost:4200/")
+        .redirectUri("http://localhost:4200/authorized")
         .scope("openid")
-        .scope("profile")
-        .scope("email")
-        .scope("api.read")
         .clientSettings(ClientSettings.builder()
           .requireProofKey(true)
           .build())
@@ -125,6 +121,8 @@ public class WebAuthorizationConfig {
       OAuth2AuthorizationServerConfigurer.class
     ).oidc(Customizer.withDefaults());
 
+    http.securityMatcher("/oauth2/**", "/.well-known/**", "/userinfo", "/logout");
+
     http.exceptionHandling(e -> {
       e.authenticationEntryPoint(
         new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)
@@ -138,6 +136,8 @@ public class WebAuthorizationConfig {
   @Order(2)
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
+    http.formLogin(Customizer.withDefaults());
+
     http.cors(Customizer.withDefaults())
       .csrf(AbstractHttpConfigurer::disable);
 
@@ -146,13 +146,15 @@ public class WebAuthorizationConfig {
       UsernamePasswordAuthenticationFilter.class
     );
 //
-    http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+    http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
 //
-    http.authorizeHttpRequests(auth -> auth
+    http
+//      .securityMatcher("/api/**")
+      .authorizeHttpRequests(auth -> auth
       .requestMatchers("/login").permitAll()
       .requestMatchers(HttpMethod.POST, "/carousel/manage").hasRole("ADMIN")
       .requestMatchers(HttpMethod.DELETE, "/carousel/manage").hasRole("ADMIN")
-      .anyRequest().permitAll()
+      .anyRequest().authenticated()
     );
 
     return http.build();
