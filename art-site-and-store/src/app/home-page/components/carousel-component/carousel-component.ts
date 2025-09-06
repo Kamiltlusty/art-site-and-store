@@ -5,6 +5,7 @@ import {BehaviorSubject, map} from 'rxjs';
 import {CarouselDataService} from '../../services/carousel-data-service';
 import {ImageService} from '../../../shared/services/image-service';
 import {Image} from '../../../shared/models/image';
+import {OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-carousel-component',
@@ -23,6 +24,8 @@ export class CarouselComponent implements AfterViewInit, OnInit {
   carouselDataService = inject(CarouselDataService);
   imageService = inject(ImageService);
   images!: Image[];
+
+  constructor(protected oauthService: OAuthService) {}
 
   ngOnInit() {
     this.imageService.getCarouselData().subscribe({

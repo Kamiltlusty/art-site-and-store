@@ -1,5 +1,5 @@
 <section class="carousel-section">
-  @if (true) {
+  @if (oauthService.hasValidAccessToken()) {
     <div class="carousel-crud-buttons-container">
       <input #fileInput style="display: none" type="file" accept="image/*" (change)="onFileSelected($event)">
       <button type="button" (click)="fileInput.click()"><img class="add-button-image" src="assets/images/add-button.png" alt="add button"></button>
