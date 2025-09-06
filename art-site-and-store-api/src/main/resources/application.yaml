@@ -17,5 +17,5 @@ spring:
 logging:
   level:
     org.springframework.security: DEBUG
-#    org.springframework.security.web.access.access: DEBUG
-#    org.springframework.security.web.access.authentication: DEBUG
+
+keySetURI: http://localhost:8080/oauth2/jwks

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -31,6 +32,7 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -46,117 +48,118 @@ import java.util.UUID;
 @Configuration
 public class WebAuthorizationConfig {
 
-  @Bean
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-    return config.getAuthenticationManager();
-  }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 
-  @Bean
-  CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration config = new CorsConfiguration();
-    config.addAllowedOrigin("http://localhost:4200");
-    config.addAllowedHeader("*");
-    config.addAllowedMethod("*");
-    config.setAllowCredentials(true);
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.setAllowCredentials(true);
 
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", config);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
 
-    return source;
-  }
+        return source;
+    }
 
-  @Bean
-  public RegisteredClientRepository registeredClientRepository() {
-    RegisteredClient registeredClient =
-      RegisteredClient
-        .withId(UUID.randomUUID().toString())
-        .clientId("client")
-        .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
-        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-        .redirectUri("http://localhost:4200/authorized")
-        .scope("openid")
-        .clientSettings(ClientSettings.builder()
-          .requireProofKey(true)
-          .build())
-        .build();
+    @Bean
+    public RegisteredClientRepository registeredClientRepository() {
+        RegisteredClient registeredClient =
+                RegisteredClient
+                        .withId(UUID.randomUUID().toString())
+                        .clientId("client")
+                        .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
+                        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                        .redirectUri("http://localhost:4200/authorized")
+                        .scope("openid")
+                        .clientSettings(ClientSettings.builder()
+                                .requireProofKey(true)
+                                .build())
+                        .build();
 
-    return new InMemoryRegisteredClientRepository(registeredClient);
-  }
+        return new InMemoryRegisteredClientRepository(registeredClient);
+    }
 
-  @Bean
-  public JWKSource<SecurityContext> jwkSource() throws NoSuchAlgorithmException {
-    KeyPairGenerator keyPairGenerator =
-      KeyPairGenerator.getInstance("RSA");
+    @Bean
+    public JWKSource<SecurityContext> jwkSource() throws NoSuchAlgorithmException {
+        KeyPairGenerator keyPairGenerator =
+                KeyPairGenerator.getInstance("RSA");
 
-    keyPairGenerator.initialize(2048);
-    KeyPair keyPair = keyPairGenerator.generateKeyPair();
+        keyPairGenerator.initialize(2048);
+        KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
-    RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-    RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
 
-    RSAKey rsaKey = new RSAKey.Builder(publicKey)
-      .privateKey(privateKey)
-      .keyID(UUID.randomUUID().toString())
-      .build();
+        RSAKey rsaKey = new RSAKey.Builder(publicKey)
+                .privateKey(privateKey)
+                .keyID(UUID.randomUUID().toString())
+                .build();
 
-    JWKSet jwkSet = new JWKSet(rsaKey);
-    return new ImmutableJWKSet<>(jwkSet);
-  }
+        JWKSet jwkSet = new JWKSet(rsaKey);
+        return new ImmutableJWKSet<>(jwkSet);
+    }
 
-  @Bean
-  public AuthorizationServerSettings authorizationServerSettings() {
-    return AuthorizationServerSettings.builder().build();
-  }
+    @Bean
+    public AuthorizationServerSettings authorizationServerSettings() {
+        return AuthorizationServerSettings.builder().build();
+    }
 
-  @Bean
-  @Order(1)
-  SecurityFilterChain asFilterChain(HttpSecurity http) throws Exception {
-    http.with(
-      OAuth2AuthorizationServerConfigurer.authorizationServer(),
-      Customizer.withDefaults()
-    );
+    @Bean
+    @Order(1)
+    SecurityFilterChain asFilterChain(HttpSecurity http) throws Exception {
+        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
+                OAuth2AuthorizationServerConfigurer.authorizationServer();
 
-    http.getConfigurer(
-      OAuth2AuthorizationServerConfigurer.class
-    ).oidc(Customizer.withDefaults());
+        http
+                .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+                .with(authorizationServerConfigurer, (authorizationServer) ->
+                        authorizationServer
+                                .oidc(Customizer.withDefaults())	// Enable OpenID Connect 1.0
+                )
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((authorize) ->
+                        authorize
+                                .anyRequest().authenticated()
+                )
+                // Redirect to the login page when not authenticated from the
+                // authorization endpoint
+                .exceptionHandling((exceptions) -> exceptions
+                        .defaultAuthenticationEntryPointFor(
+                                new LoginUrlAuthenticationEntryPoint("/login"),
+                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
+                        )
+                );
 
-    http.securityMatcher("/oauth2/**", "/.well-known/**", "/userinfo", "/logout");
+        return http.build();
+    }
 
-    http.exceptionHandling(e -> {
-      e.authenticationEntryPoint(
-        new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)
-      );
-    });
-
-    return http.build();
-  }
-
-  @Bean
-  @Order(2)
-  SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-    http.formLogin(Customizer.withDefaults());
-
-    http.cors(Customizer.withDefaults())
-      .csrf(AbstractHttpConfigurer::disable);
-
-    http.addFilterAfter(
-      new AuthenticationLoggingFilter(),
-      UsernamePasswordAuthenticationFilter.class
-    );
+//    @Bean
+//    @Order(2)
+//    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http.cors(Customizer.withDefaults())
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .formLogin(Customizer.withDefaults());
 //
-    http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS));
+//        http.addFilterAfter(
+//                new AuthenticationLoggingFilter(),
+//                UsernamePasswordAuthenticationFilter.class
+//        );
+//        http
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/login").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/carousel/manage").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.DELETE, "/carousel/manage").hasRole("ADMIN")
+//                        .anyRequest().authenticated()
+//                );
 //
-    http
-//      .securityMatcher("/api/**")
-      .authorizeHttpRequests(auth -> auth
-      .requestMatchers("/login").permitAll()
-      .requestMatchers(HttpMethod.POST, "/carousel/manage").hasRole("ADMIN")
-      .requestMatchers(HttpMethod.DELETE, "/carousel/manage").hasRole("ADMIN")
-      .anyRequest().authenticated()
-    );
-
-    return http.build();
-  }
+//        return http.build();
+//    }
 }
