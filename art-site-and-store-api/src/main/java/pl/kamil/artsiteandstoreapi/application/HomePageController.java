@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,58 +25,59 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 public class HomePageController {
-  private final ImageService imageService;
-  private final ImageMapper imageMapper;
-  private final PlaceMapper placeMapper;
-  private static final Logger logger = LoggerFactory.getLogger(HomePageController.class);
+    private final ImageService imageService;
+    private final ImageMapper imageMapper;
+    private final PlaceMapper placeMapper;
+    private static final Logger logger = LoggerFactory.getLogger(HomePageController.class);
 
-  @PostMapping("/carousel/manage")
-  public ResponseEntity<String> postImage(
-    @RequestBody ImageDTO imageDTO,
-    @RequestBody MultipartFile file) {
+    @PostMapping(value = "/carousel/manage", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<String> postImage(
+            @RequestPart(name = "place") PlaceDTO PlaceDTO,
+            @RequestPart(name = "image") MultipartFile image) {
 
 
-    return ResponseEntity.ok().body("image has been added");
-  }
+        return ResponseEntity.ok().body("image has been uploaded");
+    }
 
-  @DeleteMapping("/carousel/manage")
-  public ResponseEntity<String> deleteImage(@RequestBody ImageDTO imageDTO) {
+    @DeleteMapping("/carousel/manage")
+    public ResponseEntity<String> deleteImage(@RequestBody ImageDTO imageDTO) {
 
-    return ResponseEntity.ok().body("image has been deleted");
-  }
 
-  @GetMapping("/carousel")
-  public ResponseEntity<List<PlaceDTO>> getCarousel() {
-    List<Place> places = new ArrayList<>();
-    Place carousel = imageService.findByName("carousel");
-    Place aboutMe = imageService.findByName("about_me");
-    Place portfolio = imageService.findByName("portfolio");
+        return ResponseEntity.ok().body("image has been deleted");
+    }
 
-    places.add(carousel);
-    places.add(aboutMe);
-    places.add(portfolio);
+    @GetMapping("/carousel")
+    public ResponseEntity<List<PlaceDTO>> getCarousel() {
+        List<Place> places = new ArrayList<>();
+        Place carousel = imageService.findByName("carousel");
+        Place aboutMe = imageService.findByName("about_me");
+        Place portfolio = imageService.findByName("portfolio");
 
-    List<PlaceDTO> home = places.stream()
-      .map(placeMapper::toPlaceDTO)
-      .toList();
+        places.add(carousel);
+        places.add(aboutMe);
+        places.add(portfolio);
 
-    System.out.println(home);
+        List<PlaceDTO> home = places.stream()
+                .map(placeMapper::toPlaceDTO)
+                .toList();
 
-    return ResponseEntity
-      .ok()
-      .body(home);
-  }
+        System.out.println(home);
 
-  @GetMapping("/carousel/{uuid}")
-  public ResponseEntity<InputStreamResource> getCarousel(@PathVariable UUID uuid) throws IOException {
-    InputStreamResource isr = imageService.findByImageId(uuid);
-    HttpHeaders headers = new HttpHeaders();
+        return ResponseEntity
+                .ok()
+                .body(home);
+    }
 
-    headers.add("Content-type", "image/jpeg");
+    @GetMapping("/carousel/{uuid}")
+    public ResponseEntity<InputStreamResource> getCarousel(@PathVariable UUID uuid) throws IOException {
+        InputStreamResource isr = imageService.findByImageId(uuid);
+        HttpHeaders headers = new HttpHeaders();
 
-    return ResponseEntity
-      .ok()
-      .headers(headers)
-      .body(isr);
-  }
+        headers.add("Content-type", "image/jpeg");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .body(isr);
+    }
 }
