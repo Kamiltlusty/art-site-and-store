@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.kamil.artsiteandstoreapi.domain.dtos.ImageDTO;
 import pl.kamil.artsiteandstoreapi.domain.dtos.PlaceDTO;
+import pl.kamil.artsiteandstoreapi.domain.dtos.PlaceUploadDTO;
 import pl.kamil.artsiteandstoreapi.domain.entieties.Place;
 
 import java.io.IOException;
@@ -32,15 +33,15 @@ public class HomePageController {
 
     @PostMapping(value = "/carousel/manage", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> postImage(
-            @RequestPart(name = "place") PlaceDTO PlaceDTO,
+            @RequestPart(name = "place") PlaceUploadDTO placeUploadDTO,
             @RequestPart(name = "image") MultipartFile image) {
 
 
         return ResponseEntity.ok().body("image has been uploaded");
     }
 
-    @DeleteMapping("/carousel/manage")
-    public ResponseEntity<String> deleteImage(@RequestBody ImageDTO imageDTO) {
+    @DeleteMapping("/carousel/manage/{uuid}")
+    public ResponseEntity<String> deleteImage(@PathVariable UUID uuid) {
 
 
         return ResponseEntity.ok().body("image has been deleted");
