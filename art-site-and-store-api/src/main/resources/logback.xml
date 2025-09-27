@@ -28,7 +28,7 @@
   <logger name="pl.kamil.artsiteandstoreapi.application" level="INFO" additivity="false">
     <appender-ref ref="FILE"/>
   </logger>
-  <root level="info">
+  <root level="DEBUG">
     <appender-ref ref="STDOUT"/>
   </root>
 </configuration>

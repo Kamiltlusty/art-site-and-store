@@ -42,7 +42,8 @@ public class HomePageController {
 
     @DeleteMapping("/carousel/manage/{uuid}")
     public ResponseEntity<String> deleteImage(@PathVariable UUID uuid) {
-
+        logger.debug("Deleting image with uuid: {}", uuid);
+        imageService.deleteByImageId(uuid);
 
         return ResponseEntity.ok().body("image has been deleted");
     }

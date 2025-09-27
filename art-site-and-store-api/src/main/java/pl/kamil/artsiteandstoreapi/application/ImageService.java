@@ -58,9 +58,10 @@ public class ImageService {
 
         try {
             imageRepository.deleteByImageId(uuid);
-            logger.info("Deleted image with id {}", uuid);
+            logger.debug("Successfully deleted image with id {}", uuid);
 
         } catch (EntityNotFoundException e) {
+            logger.debug("Image with id {} not found", uuid);
             throw new ImageNotFoundException(uuid);
         }
     }
