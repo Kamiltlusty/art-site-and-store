@@ -2,7 +2,6 @@ import {AfterViewInit, Component, ElementRef, inject, OnInit, QueryList, ViewChi
 import {CarouselSlideComponent} from '../carousel-slide-component/carousel-slide-component';
 import {AsyncPipe, NgStyle} from '@angular/common';
 import {BehaviorSubject, map} from 'rxjs';
-import {CarouselDataService} from '../../services/carousel-data-service';
 import {ImageService} from '../../../shared/services/image-service';
 import {Image} from '../../../shared/models/image';
 import {OAuthService} from 'angular-oauth2-oidc';
@@ -18,10 +17,10 @@ export class CarouselComponent implements AfterViewInit, OnInit {
   @ViewChild('imgContainer') imgContainer!: ElementRef;
   offset = 0;
   selectedFile$: BehaviorSubject<File | null> = new BehaviorSubject<File | null>(null);
+  amountOfImagesCarousel$ : BehaviorSubject<number> = new BehaviorSubject<number>(0)
   transform = 'translate(0px)';
   slideWidth!: number;
   slideGap!: number;
-  carouselDataService = inject(CarouselDataService);
   imageService = inject(ImageService);
   images!: Image[];
 
@@ -32,6 +31,7 @@ export class CarouselComponent implements AfterViewInit, OnInit {
       next: places => {
         console.log(places);
         this.images = places.find(p => p.name === "carousel")?.images ?? [];
+        this.amountOfImagesCarousel$.next(this.images.length);
         this.images.forEach(i => console.log(i));
       },
       error: err => console.error(err)
@@ -52,11 +52,11 @@ export class CarouselComponent implements AfterViewInit, OnInit {
   }
 
   onRemoveButtonClick() {
-    if (this.carouselDataService.amountOfImages === 0) {
+    if (this.amountOfImagesCarousel$.value === 0) {
       console.log("amount of images in images is 0")
       return;
     }
-    this.carouselDataService.isDeleteModeOn$.next(true);
+    this.imageService.isDeleteModeOn$.next(true);
   }
 
   moveSlidesRight(): void {

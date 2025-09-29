@@ -12,12 +12,13 @@
     <div #imgContainer class="images-container">
       @for (image of images; track image.imageId; let idx = $index) {
         <app-carousel-slide-component #slide
+                                      [amountOfImages]="amountOfImagesCarousel$"
                                       (widthCollected)="getSlideWidth($event)"
                                       [transform]="transform"
-                                      [img]="image"
+                                      [imageData]="image"
                                       [style.border]="(selectedFile$ | async) ? '1px solid black' : 'none'"
                                       [style.pointer-events]="((selectedFile$ | async) ||
-                                       (carouselDataService.isDeleteModeOn$ | async)) ? 'auto' : 'none'"
+                                       (imageService.isDeleteModeOn$ | async)) ? 'auto' : 'none'"
                                       [selectedFile$]="selectedFile$"
         ></app-carousel-slide-component>
       }
