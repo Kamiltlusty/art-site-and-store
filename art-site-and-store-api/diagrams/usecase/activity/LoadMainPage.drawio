@@ -1,6 +1,6 @@
-<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-11-08T12:56:04.057Z" version="22.1.22" etag="9LU-_ZLxw13UK9yuwXuV" type="embed">
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-11-08T14:14:31.685Z" etag="6xir2aNEEWBgyEUCr7Ku" version="22.1.22" type="embed">
   <diagram name="Strona-1" id="VVcCeh8UlPmIEIhXXHNq">
-    <mxGraphModel dx="675" dy="643" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="413" pageHeight="583" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="872" dy="831" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="413" pageHeight="583" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -10,7 +10,9 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="Et3oaj_ZTMEGfYlGvXjA-10" value="User" style="swimlane;startSize=20;html=1;fillColor=#d0cee2;strokeColor=#56517e;" parent="Et3oaj_ZTMEGfYlGvXjA-9" vertex="1">
-          <mxGeometry y="20" width="120" height="460" as="geometry" />
+          <mxGeometry y="20" width="120" height="460" as="geometry">
+            <mxRectangle y="20" width="40" height="460" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="Et3oaj_ZTMEGfYlGvXjA-16" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" parent="Et3oaj_ZTMEGfYlGvXjA-10" vertex="1">
           <mxGeometry x="47.499999999999545" y="20" width="25" height="25" as="geometry" />
@@ -24,7 +26,9 @@
           <mxGeometry x="10" y="80" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Et3oaj_ZTMEGfYlGvXjA-11" value="Frontend" style="swimlane;startSize=20;html=1;fillColor=#d0cee2;strokeColor=#56517e;" parent="Et3oaj_ZTMEGfYlGvXjA-9" vertex="1">
-          <mxGeometry x="120" y="20" width="120" height="460" as="geometry" />
+          <mxGeometry x="120" y="20" width="120" height="460" as="geometry">
+            <mxRectangle x="120" y="20" width="40" height="460" as="alternateBounds" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="Et3oaj_ZTMEGfYlGvXjA-23" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Send request for image metadata&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fillColor=#d0cee2;strokeColor=#56517e;" parent="Et3oaj_ZTMEGfYlGvXjA-11" vertex="1">
           <mxGeometry x="10" y="110" width="100" height="30" as="geometry" />

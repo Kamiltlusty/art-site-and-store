@@ -2,6 +2,7 @@ package pl.kamil.artsiteandstoreapi.domain.entieties;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.kamil.artsiteandstoreapi.domain.dtos.FileName;
 
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public class Image {
   private String fileName;
 
   @Column(nullable = false)
-  private String url;
+  private String path;
 
   @Column(nullable = false, name = "mime_type")
   private String mimeType;

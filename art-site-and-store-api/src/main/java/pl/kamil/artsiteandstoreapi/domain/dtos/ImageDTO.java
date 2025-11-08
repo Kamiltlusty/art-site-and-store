@@ -7,4 +7,4 @@ import java.util.UUID;
 
 @With
 @Builder
-public record ImageDTO(UUID imageId, String fileName, String url, String mimeType, Long size, String description, Integer width, Integer height) {}
+public record ImageDTO(UUID imageId, String fileName, String path, String mimeType, Long size, String description, Integer width, Integer height) {}
