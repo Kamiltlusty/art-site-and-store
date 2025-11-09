@@ -1,7 +1,7 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.5.5'
-	id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+    id 'org.springframework.boot' version '3.5.5'
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'pl.kamil'
@@ -9,45 +9,48 @@ version = '0.0.1-SNAPSHOT'
 description = 'art-site-and-store-api'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(24)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-  // web
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-  // db
-  implementation 'org.flywaydb:flyway-core'
-  implementation 'org.flywaydb:flyway-database-postgresql'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-  runtimeOnly 'org.postgresql:postgresql'
-  testImplementation 'org.testcontainers:postgresql'
-  // lombok
-  compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-  // security
-  implementation 'org.springframework.boot:spring-boot-starter-security'
-  implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
-  testImplementation 'org.springframework.security:spring-security-test'
-  // test
-  testImplementation 'org.testcontainers:junit-jupiter'
-  testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  runtimeOnly 'org.springframework.boot:spring-boot-docker-compose'
-  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // db
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.flywaydb:flyway-database-postgresql'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation 'org.testcontainers:postgresql'
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    // security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
+    testImplementation 'org.springframework.security:spring-security-test'
+    // test
+    testImplementation 'com.github.database-rider:rider-core:1.44.0'
+    testImplementation 'com.github.database-rider:rider-spring:1.44.0'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'org.springframework.boot:spring-boot-docker-compose'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

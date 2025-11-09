@@ -19,7 +19,7 @@ public class FetchImage {
     }
 
     public List<Image> findAllByPlaceId(UUID placeId) {
-        var listImg = ir.findAllByPlaceId(placeId);
+        var listImg = ir.findAllByPlace_PlaceId(placeId);
         if (listImg.isEmpty()) {
             throw new RuntimeException("No image found");
         }
@@ -28,6 +28,6 @@ public class FetchImage {
 
 
     public List<UUID> findAllPlaceIdByPageId(Integer pageId) {
-        return pr.findAllPlaceIdByPageId(pageId);
+        return pr.findAllPlaceIdByPage_PageId(pageId);
     }
 }

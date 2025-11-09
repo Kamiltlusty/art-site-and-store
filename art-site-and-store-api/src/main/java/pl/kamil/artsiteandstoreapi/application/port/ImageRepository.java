@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ImageRepository extends JpaRepository<Image,Integer> {
-    List<Image> findAllByPlaceId(UUID placeId);
+public interface ImageRepository extends JpaRepository<Image,UUID> {
+    List<Image> findAllByPlace_PlaceId(UUID placeId);
 }

@@ -37,7 +37,7 @@ public class FetchImageTest {
     @DisplayName("invokes findByPlaceId method, should return Image")
     public void shouldReturnImage() {
         // given
-        when(ir.findAllByPlaceId(placeId))
+        when(ir.findAllByPlace_PlaceId(placeId))
                 .thenReturn(imgList);
         // when
         List<Image> result = fi.findAllByPlaceId(placeId);
@@ -49,7 +49,7 @@ public class FetchImageTest {
     @DisplayName("given MainPage id should return list of place ids")
     public void shouldReturnListOfPlaceIds() {
         // given
-        when(pr.findAllPlaceIdByPageId(anyInt()))
+        when(pr.findAllPlaceIdByPage_PageId(anyInt()))
                 .thenReturn(List.of(placeId, placeId, placeId));
         // when
         List<UUID> result = fi.findAllPlaceIdByPageId(anyInt());

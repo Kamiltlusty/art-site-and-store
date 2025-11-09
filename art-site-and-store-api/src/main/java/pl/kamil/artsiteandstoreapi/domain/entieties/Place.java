@@ -3,10 +3,10 @@ package pl.kamil.artsiteandstoreapi.domain.entieties;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @With
+@Table(name = "place")
 @Setter
 @Getter
 @Entity
@@ -23,11 +23,7 @@ public class Place {
   @Column(nullable = false)
   private String name;
 
-  @ManyToMany(fetch = FetchType.EAGER)
-  @JoinTable(
-    name = "place_image",
-    joinColumns = @JoinColumn(name = "place_id"),
-    inverseJoinColumns = @JoinColumn(name = "image_id")
-  )
-  private List<Image> images;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "page_id")
+  private Page page;
 }
