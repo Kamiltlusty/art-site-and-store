@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,15 +45,14 @@ public class FetchImageTest {
         assertFalse(result.isEmpty());
     }
 
-    private final Integer MAIN_PAGE_ID = 1;
     @Test
     @DisplayName("given MainPage id should return list of place ids")
     public void shouldReturnListOfPlaceIds() {
         // given
-        when(pr.findAllPlaceIdByPageId(MAIN_PAGE_ID))
+        when(pr.findAllPlaceIdByPageId(anyInt()))
                 .thenReturn(List.of(placeId, placeId, placeId));
         // when
-        List<UUID> result = fi.findAllPlaceIdByPageId();
+        List<UUID> result = fi.findAllPlaceIdByPageId(anyInt());
         // then
         int expected = 3;
         assertEquals(expected, result.size());

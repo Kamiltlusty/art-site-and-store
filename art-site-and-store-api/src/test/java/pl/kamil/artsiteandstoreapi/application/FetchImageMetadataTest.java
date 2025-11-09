@@ -33,14 +33,18 @@ public class FetchImageMetadataTest {
 
     @Test
     @DisplayName("This test checks whether method correctly aggregated " +
-            "and invoked other class method which is fetching images data and returns list of it")
+            "and invoked FetchImage class method fetch() to fetch images data and return list of it")
     public void shouldReturnListOfImageDTO() {
         // given
+        when(fi.findAllPlaceIdByPageId(anyInt()))
+                .thenReturn(List.of(placeId, placeId, placeId));
         when(fi.findAllByPlaceId(placeId))
                 .thenReturn(imgList);
         // when
-        List<ImageDTO> resultList = fmp.fetch(List.of(placeId, placeId, placeId));
+        List<ImageDTO> resultList = fmp.fetch();
         // then
+        verify(fi, times(1))
+                .findAllPlaceIdByPageId(anyInt());
         verify(fi, times(3))
                 .findAllByPlaceId(placeId);
         assertEquals(IMAGE_NUMBER, resultList.size());

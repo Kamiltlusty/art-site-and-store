@@ -13,12 +13,15 @@ import java.util.UUID;
 @Service
 public class FetchMainPageImageListUC {
     private final FetchImage fi;
+    private final int MAIN_PAGE_ID = 1;
 
     public FetchMainPageImageListUC(FetchImage fi) {
         this.fi = fi;
     }
 
-    public List<ImageDTO> fetch(List<UUID> placeIds) {
+    public List<ImageDTO> fetch() {
+        List<UUID> placeIds = fi.findAllPlaceIdByPageId(MAIN_PAGE_ID);
+
         List<Image> images = new ArrayList<>();
         for (var placeId : placeIds){
             images.addAll(fi.findAllByPlaceId(placeId));
