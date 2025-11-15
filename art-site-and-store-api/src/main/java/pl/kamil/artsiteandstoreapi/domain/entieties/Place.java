@@ -11,6 +11,7 @@ import java.util.UUID;
 @Getter
 @Entity
 @Builder
+@ToString(of = {"placeId", "name"})
 @EqualsAndHashCode(of = "placeId")
 @NoArgsConstructor
 @AllArgsConstructor
