@@ -18,8 +18,8 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 public class CustomEntryPoint implements AuthenticationEntryPoint {
-  private final Logger logger = LoggerFactory.getLogger(CustomEntryPoint.class);
   private final SecurityContext securityContext;
+
 
   @Override
   public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {

@@ -1,4 +1,4 @@
-package pl.kamil.artsiteandstoreapi.domain.dtos;
+package pl.kamil.artsiteandstoreapi.application.dtos;
 
 import lombok.Builder;
 import lombok.With;

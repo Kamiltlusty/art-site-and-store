@@ -1,9 +1,9 @@
 package pl.kamil.artsiteandstoreapi.application.usecase;
 
 import org.springframework.stereotype.Service;
-import pl.kamil.artsiteandstoreapi.domain.dtos.ImageDTO;
+import pl.kamil.artsiteandstoreapi.application.dtos.ImageDTO;
 import pl.kamil.artsiteandstoreapi.domain.entieties.Image;
-import pl.kamil.artsiteandstoreapi.domain.services.FetchImage;
+import pl.kamil.artsiteandstoreapi.domain.services.ImageService;
 import pl.kamil.artsiteandstoreapi.domain.services.ImageMapper;
 
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import java.util.UUID;
 
 @Service
 public class FetchMainPageImageListUC {
-    private final FetchImage fi;
+    private final ImageService fi;
     private final int MAIN_PAGE_ID = 1;
 
-    public FetchMainPageImageListUC(FetchImage fi) {
+    public FetchMainPageImageListUC(ImageService fi) {
         this.fi = fi;
     }
 

@@ -3,6 +3,7 @@ package pl.kamil.artsiteandstoreapi.configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
+@Profile(value = {"dev", "prod"})
 @Configuration
 public class ResourceServerConfig {
 
@@ -27,7 +29,7 @@ public class ResourceServerConfig {
                 ))
                 .authorizeHttpRequests(
                         c -> c.
-                                requestMatchers("/carousel/**").permitAll()
+                                requestMatchers("/api/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/carousel/manage").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/carousel/manage").hasRole("ADMIN")
                                 .anyRequest().authenticated()

@@ -6,20 +6,20 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.kamil.artsiteandstoreapi.application.port.ImageRepository;
-import pl.kamil.artsiteandstoreapi.application.port.PlaceRepository;
+import pl.kamil.artsiteandstoreapi.domain.ports.ImageRepository;
+import pl.kamil.artsiteandstoreapi.domain.ports.PlaceRepository;
 import pl.kamil.artsiteandstoreapi.domain.entieties.Image;
-import pl.kamil.artsiteandstoreapi.domain.services.FetchImage;
+import pl.kamil.artsiteandstoreapi.domain.services.ImageService;
 
 import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class FetchImageTest {
+public class ImageServiceTest {
     @Mock
     ImageRepository ir;
 
@@ -27,7 +27,7 @@ public class FetchImageTest {
     PlaceRepository pr;
 
     @InjectMocks
-    FetchImage fi;
+    ImageService is;
 
     private final List<Image> imgList = List.of(new Image());
     private final String validUUID = "26929514-237c-11ed-861d-0242ac120002";
@@ -40,7 +40,7 @@ public class FetchImageTest {
         when(ir.findAllByPlace_PlaceId(placeId))
                 .thenReturn(imgList);
         // when
-        List<Image> result = fi.findAllByPlaceId(placeId);
+        List<Image> result = is.findAllByPlaceId(placeId);
         // then
         assertFalse(result.isEmpty());
     }
@@ -52,7 +52,7 @@ public class FetchImageTest {
         when(pr.findAllPlaceIdByPage_PageId(anyInt()))
                 .thenReturn(List.of(placeId, placeId, placeId));
         // when
-        List<UUID> result = fi.findAllPlaceIdByPageId(anyInt());
+        List<UUID> result = is.findAllPlaceIdByPageId(anyInt());
         // then
         int expected = 3;
         assertEquals(expected, result.size());

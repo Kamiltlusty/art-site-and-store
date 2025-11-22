@@ -1,4 +1,4 @@
-package pl.kamil.artsiteandstoreapi.domain.dtos;
+package pl.kamil.artsiteandstoreapi.domain.vo;
 
 import lombok.*;
 

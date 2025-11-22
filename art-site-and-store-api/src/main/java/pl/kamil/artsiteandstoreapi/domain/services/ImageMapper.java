@@ -1,7 +1,7 @@
 package pl.kamil.artsiteandstoreapi.domain.services;
 
 import org.springframework.stereotype.Component;
-import pl.kamil.artsiteandstoreapi.domain.dtos.ImageDTO;
+import pl.kamil.artsiteandstoreapi.application.dtos.ImageDTO;
 import pl.kamil.artsiteandstoreapi.domain.entieties.Image;
 
 @Component

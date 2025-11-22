@@ -1,4 +1,4 @@
-package pl.kamil.artsiteandstoreapi.application;
+package pl.kamil.artsiteandstoreapi.application.usecase;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -6,11 +6,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.kamil.artsiteandstoreapi.application.port.ImageRepository;
-import pl.kamil.artsiteandstoreapi.application.usecase.FetchMainPageImageListUC;
-import pl.kamil.artsiteandstoreapi.domain.dtos.ImageDTO;
+import pl.kamil.artsiteandstoreapi.application.dtos.ImageDTO;
 import pl.kamil.artsiteandstoreapi.domain.entieties.Image;
-import pl.kamil.artsiteandstoreapi.domain.services.FetchImage;
+import pl.kamil.artsiteandstoreapi.domain.services.ImageService;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class FetchImageMetadataTest {
+public class ImageServiceMetadataTest {
     @Mock
-    FetchImage fi;
+    ImageService fi;
 
     @InjectMocks
     FetchMainPageImageListUC fmp;
