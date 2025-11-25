@@ -1,4 +1,4 @@
-package pl.kamil.artsiteandstoreapi.application.usecase;
+package pl.kamil.artsiteandstoreapi.domain.ports.incoming;
 
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.configuration.Orthography;
@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class FetchMainPageImageListUCIT {
+public class FetchMainPageImagesITTest {
 
     @Container
     @ServiceConnection

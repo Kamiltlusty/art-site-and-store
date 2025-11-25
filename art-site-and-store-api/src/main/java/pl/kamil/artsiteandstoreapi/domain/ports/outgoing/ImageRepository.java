@@ -1,4 +1,4 @@
-package pl.kamil.artsiteandstoreapi.domain.ports;
+package pl.kamil.artsiteandstoreapi.domain.ports.outgoing;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

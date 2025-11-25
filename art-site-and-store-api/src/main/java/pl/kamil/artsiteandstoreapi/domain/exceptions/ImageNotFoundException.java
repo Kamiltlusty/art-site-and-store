@@ -1,4 +1,4 @@
-package pl.kamil.artsiteandstoreapi.application.exceptions;
+package pl.kamil.artsiteandstoreapi.domain.exceptions;
 
 import java.util.UUID;
 

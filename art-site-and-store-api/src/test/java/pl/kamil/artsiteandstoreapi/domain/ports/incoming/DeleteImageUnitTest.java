@@ -1,16 +1,14 @@
-package pl.kamil.artsiteandstoreapi.application.usecase;
+package pl.kamil.artsiteandstoreapi.domain.ports.incoming;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import pl.kamil.artsiteandstoreapi.application.exceptions.ImageNotFoundException;
-import pl.kamil.artsiteandstoreapi.application.ports.DeleteImageUC;
+import pl.kamil.artsiteandstoreapi.domain.exceptions.ImageNotFoundException;
+import pl.kamil.artsiteandstoreapi.domain.usecase.DeleteImageImpl;
 import pl.kamil.artsiteandstoreapi.domain.entieties.Image;
-import pl.kamil.artsiteandstoreapi.domain.ports.ImageRepository;
-import pl.kamil.artsiteandstoreapi.domain.ports.PlaceRepository;
-import pl.kamil.artsiteandstoreapi.domain.services.ImageService;
+import pl.kamil.artsiteandstoreapi.domain.ports.outgoing.ImageRepository;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -19,20 +17,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class DeleteImageUCUnitTest {
+public class DeleteImageUnitTest {
 
     @Mock
     ImageRepository ir;
-
-    @Mock
-    PlaceRepository pr;
 
     @Test
     @DisplayName("verifies whether findById and deleteById methods were invoked")
     void shouldDeleteImageById() {
         // given
         UUID id = UUID.randomUUID();
-        DeleteImageUC di = new DeleteImageUCImpl(new ImageService(ir, pr));
+        DeleteImage di = new DeleteImageImpl(ir);
         when(ir.findById(id))
                 .thenReturn(Optional.of(new Image().withImageId(id)));
         doNothing().when(ir).deleteById(id);
@@ -48,7 +43,7 @@ public class DeleteImageUCUnitTest {
     void shouldThrowImageNotFoundException() {
         // given
         UUID id = UUID.randomUUID();
-        DeleteImageUC di = new DeleteImageUCImpl(new ImageService(ir, pr));
+        DeleteImage di = new DeleteImageImpl(ir);
         when(ir.findById(id))
                 .thenReturn(Optional.of(new Image().withImageId(id)));
         doThrow(ImageNotFoundException.class)

@@ -1,4 +1,4 @@
-package pl.kamil.artsiteandstoreapi.domain.services;
+package pl.kamil.artsiteandstoreapi.domain.usecase.services;
 
 import org.springframework.stereotype.Component;
 import pl.kamil.artsiteandstoreapi.application.dtos.ImageDTO;

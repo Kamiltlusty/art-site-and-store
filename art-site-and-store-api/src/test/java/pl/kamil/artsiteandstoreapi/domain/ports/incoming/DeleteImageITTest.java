@@ -1,4 +1,4 @@
-package pl.kamil.artsiteandstoreapi.application.usecase;
+package pl.kamil.artsiteandstoreapi.domain.ports.incoming;
 
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.configuration.Orthography;
@@ -19,7 +19,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import pl.kamil.artsiteandstoreapi.configuration.TestSecurityConfig;
-import pl.kamil.artsiteandstoreapi.domain.ports.ImageRepository;
+import pl.kamil.artsiteandstoreapi.domain.ports.outgoing.ImageRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Testcontainers
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class DeleteImageUCImplTest {
+class DeleteImageITTest {
 
     @Container
     @ServiceConnection

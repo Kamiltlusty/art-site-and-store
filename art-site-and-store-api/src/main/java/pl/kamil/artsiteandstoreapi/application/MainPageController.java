@@ -5,10 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.kamil.artsiteandstoreapi.application.dtos.ImageDTO;
-import pl.kamil.artsiteandstoreapi.application.ports.DeleteImageUC;
-import pl.kamil.artsiteandstoreapi.application.usecase.FetchMainPageImageListUC;
+import pl.kamil.artsiteandstoreapi.application.dtos.PlaceDTO;
+import pl.kamil.artsiteandstoreapi.domain.ports.incoming.DeleteImage;
+import pl.kamil.artsiteandstoreapi.domain.usecase.FetchMainPageImagesImpl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -16,12 +18,12 @@ import java.util.UUID;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class MainPageController {
-    private final FetchMainPageImageListUC fmpIL;
-    private final DeleteImageUC deleteUC;
+    private final FetchMainPageImagesImpl fmpIL;
+    private final DeleteImage deleteUC;
 
     @GetMapping("/main-page")
-    public ResponseEntity<List<ImageDTO>> getImagesMetadata() {
-        List<ImageDTO> fetch = fmpIL.fetch();
+    public ResponseEntity<Map<PlaceDTO, List<ImageDTO>>> getImagesMetadata() {
+        var fetch = fmpIL.fetch();
 
         return ResponseEntity
                 .ok()

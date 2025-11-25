@@ -1,6 +1,6 @@
-<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-11-22T14:54:34.912Z" etag="g0RyljIn45wuaquv0unz" version="22.1.22" type="embed">
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-11-25T14:57:45.625Z" etag="N_Rsxq5_ULdO0YPbYdkT" version="22.1.22" type="embed">
   <diagram name="Strona-1" id="VVcCeh8UlPmIEIhXXHNq">
-    <mxGraphModel dx="499" dy="527" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="413" pageHeight="583" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="508" dy="798" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="413" pageHeight="583" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -30,10 +30,10 @@
             <mxRectangle x="120" y="20" width="40" height="460" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-23" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Send request for image metadata&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-11" vertex="1">
+        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-23" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Send request for main page structure&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-11" vertex="1">
           <mxGeometry x="10" y="110" width="100" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-33" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Redner page&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-11" vertex="1">
+        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-33" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Render page&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-11" vertex="1">
           <mxGeometry x="10" y="260" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Et3oaj_ZTMEGfYlGvXjA-34" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" parent="Et3oaj_ZTMEGfYlGvXjA-11" source="Et3oaj_ZTMEGfYlGvXjA-33" edge="1">
@@ -51,16 +51,16 @@
         <mxCell id="Et3oaj_ZTMEGfYlGvXjA-12" value="Backend" style="swimlane;startSize=20;html=1;" parent="Et3oaj_ZTMEGfYlGvXjA-9" vertex="1">
           <mxGeometry x="240" y="20" width="120" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-25" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Fetch image&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;font-size: 9px;&quot;&gt;metadata&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-12" vertex="1">
+        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-25" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Fetch main page structure&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-12" vertex="1">
           <mxGeometry x="10" y="140" width="100" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-31" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Send&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;font-size: 9px;&quot;&gt;metadata&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-12" vertex="1">
+        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-31" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Send&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;font-size: 9px;&quot;&gt;structure&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-12" vertex="1">
           <mxGeometry x="10" y="215" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Et3oaj_ZTMEGfYlGvXjA-28" value="Database" style="swimlane;startSize=20;html=1;" parent="Et3oaj_ZTMEGfYlGvXjA-9" vertex="1">
           <mxGeometry x="360" y="20" width="130" height="460" as="geometry" />
         </mxCell>
-        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-29" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Send&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;font-size: 9px;&quot;&gt;metadata&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-28" vertex="1">
+        <mxCell id="Et3oaj_ZTMEGfYlGvXjA-29" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;fetch&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;" parent="Et3oaj_ZTMEGfYlGvXjA-28" vertex="1">
           <mxGeometry x="10" y="170" width="100" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Et3oaj_ZTMEGfYlGvXjA-20" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="Et3oaj_ZTMEGfYlGvXjA-9" source="Et3oaj_ZTMEGfYlGvXjA-19" target="Et3oaj_ZTMEGfYlGvXjA-23" edge="1">
