@@ -1,6 +1,8 @@
 package pl.kamil.artsiteandstoreapi.application.dtos;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.With;
 
 import java.util.UUID;

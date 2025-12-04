@@ -18,4 +18,17 @@ public class ImageMapper {
                 .height(image.getHeight())
                 .build();
     }
+
+    public Image toImage(ImageDTO imageDTO) {
+        return Image.builder()
+                .imageId(imageDTO.imageId())
+                .fileName(imageDTO.fileName())
+                .path(imageDTO.path())
+                .mimeType(imageDTO.mimeType())
+                .size(imageDTO.size())
+                .description(imageDTO.description())
+                .width(imageDTO.width())
+                .height(imageDTO.height())
+                .build();
+    }
 }
