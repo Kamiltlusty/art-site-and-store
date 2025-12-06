@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.kamil.artsiteandstoreapi.application.dtos.ImageDTO;
 import pl.kamil.artsiteandstoreapi.domain.entieties.Image;
+import pl.kamil.artsiteandstoreapi.domain.exceptions.ImageSizeExceeded;
 import pl.kamil.artsiteandstoreapi.domain.ports.outgoing.ImageRepository;
 import pl.kamil.artsiteandstoreapi.domain.usecase.SaveImageImpl;
 import pl.kamil.artsiteandstoreapi.domain.usecase.services.ImageMapper;
@@ -16,6 +17,7 @@ import pl.kamil.artsiteandstoreapi.infrastracture.utils.UUIDGeneratorTestImpl;
 
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,7 +43,6 @@ class SaveImageUnitTest {
         testUUID = uuidGTI.generateUUID();
     }
 
-
     @Test
     void shouldSaveImage() {
         // given
@@ -56,6 +57,14 @@ class SaveImageUnitTest {
         // then
         assertEquals(image, result);
         verify(ir, times(1)).save(image);
+    }
+
+    @Test
+    void shouldThrowExceptionImageSizeExceeded() {
+        // given
+        ImageDTO imageDTO = createImageDTO().withSize(15 * 1024 * 1024L);
+        // when, then
+        assertThrows(ImageSizeExceeded.class, () -> si.save(imageDTO));
     }
 
     public Image createImage() {

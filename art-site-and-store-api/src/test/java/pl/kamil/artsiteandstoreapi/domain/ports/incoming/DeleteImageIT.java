@@ -9,20 +9,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
+import org.springframework.test.context.ContextConfiguration;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import pl.kamil.artsiteandstoreapi.configuration.ContainerConnection;
 import pl.kamil.artsiteandstoreapi.configuration.TestSecurityConfig;
 import pl.kamil.artsiteandstoreapi.domain.ports.outgoing.ImageRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Import(TestSecurityConfig.class)
 @DBUnit(caseSensitiveTableNames = true, caseInsensitiveStrategy = Orthography.LOWERCASE)
@@ -30,23 +28,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Testcontainers
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class DeleteImageITTest {
-
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17.5");
-
+@ContextConfiguration(initializers = {ContainerConnection.class})
+class DeleteImageIT {
     @Autowired
     TestRestTemplate restTemplate;
 
     @Autowired
     ImageRepository ir;
-
-    @Test
-    void connectionEstablished() {
-        assertTrue(postgres.isCreated());
-        assertTrue(postgres.isRunning());
-    }
 
     @Test
     @DataSet(value = {"datasets/images.json", "datasets/places.json", "datasets/pages.json"}, cleanBefore = true)
