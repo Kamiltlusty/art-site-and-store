@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = {ContainerConnection.class})
-class DeleteImageIT {
+class DeleteImageITTest {
     @Autowired
     TestRestTemplate restTemplate;
 

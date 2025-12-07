@@ -6,7 +6,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
-public class ContainerConnectionTest extends ContainerConnection {
+public class ContainerConnectionITTest extends ContainerConnection {
 
     @Test
     void connectionEstablished() {

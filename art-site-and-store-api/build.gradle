@@ -53,6 +53,35 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-tasks.named('test') {
+tasks.named('test', Test) {
     useJUnitPlatform()
+}
+
+tasks.register('runUnitTests', Test) {
+    description = 'Runs only unit tests'
+    group = 'verification'
+
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+
+    useJUnitPlatform()
+
+    filter {
+        includeTestsMatching "*UnitTest"
+    }
+}
+
+tasks.register('runIntegrationTests', Test) {
+    description = 'Runs only integration tests'
+    group = 'verification'
+
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    shouldRunAfter test
+
+    useJUnitPlatform()
+
+    filter {
+        includeTestsMatching "*ITTest"
+    }
 }
