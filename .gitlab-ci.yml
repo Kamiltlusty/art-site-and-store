@@ -3,7 +3,7 @@ stages:
   - test
 
 build_api:
-  image: gradle:8.14.3-alpine
+  image: gradle:9.2.1-jdk25-alpine
   stage: build
   script:
    - cd art-site-and-store-api
