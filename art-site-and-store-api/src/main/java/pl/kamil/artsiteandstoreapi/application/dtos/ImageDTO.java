@@ -1,0 +1,12 @@
+package pl.kamil.artsiteandstoreapi.application.dtos;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.With;
+
+import java.util.UUID;
+
+@With
+@Builder
+public record ImageDTO(UUID imageId, String fileName, String path, String mimeType, Long size, String description, Integer width, Integer height) {}

@@ -1,0 +1,37 @@
+{
+  "image": [
+    {
+      "image_id": "f3180420-c8ac-4e3b-a8da-ffcfa78f03d7",
+      "file_name": "obrazek1",
+      "path":  "static/obrazek1.jpeg",
+      "mime_type": "image/jpeg",
+      "size": 1000,
+      "description": "opis",
+      "width": 50,
+      "height": 100,
+      "place_id": "54adf1b6-10b9-41f6-aa55-38ec396505da"
+    },
+    {
+      "image_id": "b955eaa3-3c29-42e6-aeca-8280d6862986",
+      "file_name": "obrazek2",
+      "path": "static/obrazek2.jpeg",
+      "mime_type": "image/jpeg",
+      "size": 1000,
+      "description": "opis",
+      "width": 50,
+      "height": 100,
+      "place_id": "e112ed68-be19-44be-af4b-1ead42004741"
+    },
+    {
+      "image_id": "76955d8a-46f7-486b-8f24-c6bbea8051b5",
+      "file_name": "obrazek3",
+      "path": "static/obrazek3.jpeg",
+      "mime_type": "image/jpeg",
+      "size": 1000,
+      "description": "opis",
+      "width": 50,
+      "height": 100,
+      "place_id": "8baa84a1-d7ec-402e-bcbc-88ecf7421a15"
+    }
+  ]
+}

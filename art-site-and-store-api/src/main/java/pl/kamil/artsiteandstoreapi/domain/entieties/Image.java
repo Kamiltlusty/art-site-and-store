@@ -6,11 +6,12 @@ import lombok.*;
 import java.util.UUID;
 
 @With
+@Table(name = "image")
 @Setter
 @Getter
 @Entity
 @Builder
-@EqualsAndHashCode(of = "image_id")
+@EqualsAndHashCode(of = "imageId")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Image {
@@ -23,7 +24,7 @@ public class Image {
   private String fileName;
 
   @Column(nullable = false)
-  private String url;
+  private String path;
 
   @Column(nullable = false, name = "mime_type")
   private String mimeType;
@@ -32,4 +33,8 @@ public class Image {
   private String description;
   private Integer width;
   private Integer height;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "place_id")
+  private Place place;
 }
