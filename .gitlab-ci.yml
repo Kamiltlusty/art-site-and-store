@@ -10,4 +10,32 @@ build_api:
    - chmod +x gradlew
    - ./gradlew clean
    - ./gradlew build
+  artifacts:
+    paths:
+      - build/
+  
+unit_tests:
+  image: gradle:9.2.1-jdk25-alpine
+  stage: test
+  script:
+  - cd art-site-and-store-api
+  - chmod +x gradlew
+  - ./gradlew runUnitTests
+  artifacts:
+    when: always
+    reports: 
+      junit: build/reports/tests/runUnitTests
+
+
+integration_tests:
+  image: gradle:9.2.1-jdk25-alpine
+  stage: test
+  script:
+  - cd art-site-and-store-api
+  - chmod +x gradlew
+  - ./gradlew runIntegrationTests
+  artifacts:
+    when: always
+    reports:
+      junit: build/reports/tests/runIntegrationTests
 
